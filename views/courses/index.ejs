@@ -1,0 +1,46 @@
+<h2 class="center">Course Table</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th># Students</th>
+            <th>Cost</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% courses.forEach(course => { %>
+            <tr>
+                <td>
+                    <a href="<%=`/courses/${course._id}`%>">
+                        <%= course.title %>
+                    </a>
+                </td>
+                <td>
+                    <%= course.description %>
+                </td>
+                <td>
+                    <%= course.maxStudents %>
+                </td>
+                <td>
+                    $<%= course.cost %>
+                </td>
+                <td>
+                    <a href="<%=` courses/${course._id}/edit `%>">
+                        Edit
+                    </a>
+                </td>
+                <td>
+                    <a href="<%=` courses/${course._id}/delete?_method=DELETE `%>" onclick="return confirm('Are you sure?')">
+                        Delete
+                    </a>
+                </td>
+            </tr>       
+        <% }) %>
+        <a href="/courses/new">
+            <span class="button">Add Course</span>
+        </a>
+    </tbody>
+</table>

@@ -1,0 +1,13 @@
+<div class="form-data">
+    <form action="<%= `/users/${user._id}/update?_method=PUT` %>" method="POST">
+        <label for="txtFirstName">First Name</label>
+        <input type="text" name="firstName" id="txtFirstName"autofocus required value="<%= user.name.first %>"><br>
+        <label for="txtLastName">Last Name</label>
+        <input type="text" name="lastName" id="txtLastName" required value="<%= user.name.last %>"><br>
+        <label for="txtEmail">Email Address</label>
+        <input type="email" name="email" id="txtEmail" required value="<%= user.email %>"><br>
+        <label for="txtZipCode">Zip Code</label>
+        <input type="text" name="zipCode" id="txtZipCode" required value="<%= user.zipCode %>"><br>
+        <button type="submit">Save</button>
+    </form>
+</div>
