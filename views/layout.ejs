@@ -18,7 +18,7 @@
                 <a href="/courses">
                     <span class="button">Courses</span>
                 </a>
-                <a href="/contact">
+                <a href="/subscribers">
                     <span class="button">Contact</span>
                 </a>
                 <a href="/users">
@@ -26,6 +26,34 @@
                 </a>
             </div>
         </div>
-        <%- body%>
+
+        <div class="login">
+            <% if(loggedIn) { %>
+                <p> Logged in as <a href="<%`/users/${currentUser._id}`%>">
+                <%= currentUser.fullName %>
+                </a>
+                <a href="/users/logout">Log out</a>
+            </p>
+            <% } else { %>
+            <a href="/users/login">Log in</a>
+            <% } %>
+        </div>
+        
+        <div class="flashes">
+            <% if(flashMessages) { %>
+                <% if(flashMesages.success) { %>
+                    <div class="flash success">
+                        <% flashMessages.success %>
+                    </div>
+                <% } else if(flashMessage.error) { %>
+                    <div class="flash error">
+                        <%= flashMessages.error %>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+        <div class="container">
+            <%- body%>
+        </div>
     </body>
 </html>
