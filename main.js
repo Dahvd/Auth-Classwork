@@ -46,7 +46,7 @@ router.use(cookieParser("my_passcode"));
 router.use(expressSession({
     secret: "my_passcode",
     cookie: {
-        maxAge: 360000,
+        maxAge: 360000
     },
     resave: false,
     saveUninitialized: false

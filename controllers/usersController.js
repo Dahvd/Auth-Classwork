@@ -43,6 +43,7 @@ module.exports = {
             if(user) {
                 req.flash("success", "User has been successfully created");
                 res.locals.redirect = "/users";
+                next();
             }
             else {
                 req.flash("error", `Failed to create user: ${error.message}`);
@@ -66,7 +67,7 @@ module.exports = {
         req.getValidationResult().then((error) => {
             if(!error.isEmpty()) {
                 let messages = error.array().map(e => e.msg);
-                req.flash("error", message.join(" and "));
+                req.flash("error", messages.join(" and "));
                 req.skip = true;
                 res.locals.redirect = "/users/new";
                 next();
