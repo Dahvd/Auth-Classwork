@@ -73,7 +73,7 @@ module.exports = {
         let updatedCourse = {
             title: req.body.title,
             description: req.body.description,
-            maxStudent: req.body.maxStudent,
+            maxStudents: req.body.maxStudents,
             cost: req.body.cost
         };
 

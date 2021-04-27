@@ -29,11 +29,14 @@
 
         <div class="login">
             <% if(loggedIn) { %>
-                <p> Logged in as <a href="<%=`/users/${currentUser._id}`%>">
-                <%= currentUser.fullName %>
-                </a>
-                <a href="/users/logout">Log out</a>
-            </p>
+                <p> Logged in as 
+                    <a href="<%=`/users/${currentUser._id}`%>">
+                        <%= currentUser.fullName %>
+                    </a>
+                    <span class="log-out">
+                        <a href="/users/logout">Log out</a>
+                    </span>
+                </p>
             <% } else { %>
             <a href="/users/login">Log in</a>
             <% } %>
@@ -41,11 +44,11 @@
         
         <div class="flashes">
             <% if(flashMessages) { %>
-                <% if(flashMesages.success) { %>
+                <% if(flashMessages.success) { %>
                     <div class="flash success">
-                        <% flashMessages.success %>
+                        <%= flashMessages.success %>
                     </div>
-                <% } else if(flashMessage.error) { %>
+                <% } else if(flashMessages.error) { %>
                     <div class="flash error">
                         <%= flashMessages.error %>
                     </div>

@@ -1,6 +1,6 @@
 "use strict";
-const passport = require('passport');
-const User = require("../models/user"),
+const passport = require('passport'),
+    User = require("../models/user"),
     getUserParams = body => {
         return {
             name: {
@@ -41,7 +41,7 @@ module.exports = {
 
         User.register(newUser, req.body.password, (error, user) => {
             if(user) {
-                req.flash("success", "User has been successfully created");
+                req.flash("success", `${user.fullName} has been successfully created`);
                 res.locals.redirect = "/users";
                 next();
             }
@@ -57,7 +57,7 @@ module.exports = {
             all_lowercase: true
         }).trim();
 
-        req.check("email", "email is not valid!").isEmail();
+        req.check("email", "email is not valid!").notEmpty().isEmail();
         req.check("zipCode", "Zip Code is not valid.").notEmpty().isInt().isLength({
             min: 5, 
             max: 5
@@ -120,16 +120,8 @@ module.exports = {
     },
     update: (req, res, next) => {
         if(req.skip) return next();
-        let userId = req.params.id;
-        let updatedUser = {
-            name: {
-                first: req.body.firstName,
-                last: req.body.lastName
-            },
-            email: req.body.email,
-            zipCode: req.body.zipCode,
-            password: req.body.password
-        };
+        let userId = req.params.id,
+        updatedUser = getUserParams(req.body);
         User.findByIdAndUpdate(userId, updatedUser)
         .then(user => {
             res.locals.user = user;

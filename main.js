@@ -31,7 +31,7 @@ app.set("view engine", "ejs");
 router.use(methodOverride("_method", {methods: ["POST", "GET"]}));
 router.use(layouts);
 router.use(express.static("public"));
-router.use(expressValidator);
+router.use(expressValidator());
 
 app.use(
     express.urlencoded({
@@ -57,13 +57,14 @@ router.use(connectFlash());
 router.use(passport.initialize());
 router.use(passport.session());
 passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser);
-passport.deserializeUser(User.deserializeUser);
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 router.use((req, res, next) => {
     res.locals.flashMessages = req.flash();
-    res.locals.loggedIn = req.isUnauthenticated();
+    res.locals.loggedIn = req.isAuthenticated();
     res.locals.currentUser = req.user;
+    next();
 })
 
 
